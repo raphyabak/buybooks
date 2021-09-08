@@ -15,8 +15,8 @@
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 border rounded-md">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-medium text-gray-700">Order total (2)</h3>
-                            <span class="text-sm text-gray-600">Edit</span>
+                            <h3 class="font-medium text-gray-700">Order total </h3>
+                            {{-- <span class="text-sm text-gray-600">Edit</span> --}}
                         </div>
                         {{-- @livewire('cart') --}}
                     </div>
