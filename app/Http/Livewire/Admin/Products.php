@@ -7,6 +7,7 @@ use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 
 class Products extends Component
@@ -21,6 +22,7 @@ class Products extends Component
     public $image;
     public $category;
     public $code;
+    public $description;
 
     protected $rules = [
         'title' => 'required',
@@ -70,6 +72,8 @@ class Products extends Component
                 'price' => $this->price,
                 'stock' => $this->stock,
                 'code' => $this->code,
+                'slug' => Str::slug($this->title),
+                'description' => $this->description,
                 // 'category_id' => $this->category,
                 'image' => $imageName,
                 'sales' => 0
@@ -81,6 +85,8 @@ class Products extends Component
                 'price' => $this->price,
                 'stock' => $this->stock,
                 'code' => $this->code,
+                'slug' => Str::slug($this->title),
+                'description' => $this->description,
                 // 'category_id' => $this->category,
                 'sales' => 0
 

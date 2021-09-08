@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Categories;
 use App\Http\Livewire\Admin\Permissions;
 use App\Http\Livewire\Admin\Products;
@@ -7,6 +8,7 @@ use App\Http\Livewire\Admin\Roles;
 use App\Http\Livewire\Admin\Users;
 use App\Http\Livewire\Checkout;
 use App\Http\Livewire\Home;
+use App\Http\Livewire\ProductDetails;
 use App\Http\Livewire\Success;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)->name('home');
 Route::get('checkout', Checkout::class)->name('checkout');
 Route::get('success', Success::class)->name('success');
+Route::get('product/{product:slug}', [ProductController::class, 'details'])->name('details');
 Route::get('/rave/callback', [App\Http\Controllers\FlutterwaveController::class, 'callback'])->name('callback');
 
 Route::middleware(['auth'])->group(function () {

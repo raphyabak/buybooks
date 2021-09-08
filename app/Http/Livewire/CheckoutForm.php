@@ -19,17 +19,24 @@ class CheckoutForm extends Component
 
     // public $total;
 
-    protected $rules = [
-        'name' => 'required',
-        'email' => 'required|string|email|max:255',
-        // 'password' => ['required'],
-        'address' => 'required',
-    ];
+    // protected $rules = [
+    //     'name' => 'required',
+    //     'email' => 'required|string|email|max:255',
+    //     // 'password' => ['required'],
+    //     'address' => 'required',
+    // ];
 
-    // public function mount(){
-    //     $cartId = 1;
-    //     $this->total = \Cart::session($cartId)->getTotal();
-    // }
+    public function mount()
+    {
+        // $cartId = 1;
+        // $this->total = \Cart::session($cartId)->getTotal();
+        if (Auth::check()) {
+            $this->name = auth()->user()->name;
+            $this->email = auth()->user()->email;
+            $this->address = auth()->user()->address;
+            $this->phone = auth()->user()->phone;
+        }
+    }
 
     public function buy()
     {
@@ -37,12 +44,20 @@ class CheckoutForm extends Component
         $total = \Cart::session($cartId)->getTotal();
         // $totall = number_format($totali);
         // dd($total);
-        $this->validate();
+        // $this->validate();
 
         $userlogged = Auth::user();
         $userexist = User::where('email', '=', $this->email)->first();
         // dd($user);
         if (!$userlogged && $userexist === null) {
+
+            $this->validate([
+                'name' => 'required',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => ['required'],
+                'address' => 'required',
+            ]);
+
             $user = User::create([
                 'name' => $this->name,
                 'email' => $this->email,
@@ -56,54 +71,67 @@ class CheckoutForm extends Component
             Auth::login($user);
 
         }
-        if(!$userlogged  && $userexist) {
+
+        if (!$userlogged && $userexist) {
+
+            $this->validate([
+                'email' => 'required|string|email|max:255',
+                'password' => ['required'],
+            ]);
+
             $user = ['email' => $this->email,
                 'password' => $this->password,
             ];
 
-            Auth::attempt($user);
+            $login = Auth::attempt($user);
+            if (!$login) {
+                session()->flash('failed', 'Password Incorrect 😞');
+            }
         }
 
-
-        $reference = Flutterwave::generateReference();
-        // dd($reference);
-        $data = [
-            'payment_options' => 'card,banktransfer',
-            'amount' => $total,
-            'email' => $this->email,
-            'tx_ref' => $reference,
-            'currency' => "NGN",
-            'redirect_url' => route('callback'),
-            'customer' => [
+        if ($total > 0) {
+            $reference = Flutterwave::generateReference();
+            // dd($reference);
+            $data = [
+                'payment_options' => 'card,banktransfer',
+                'amount' => $total,
                 'email' => $this->email,
-                // "phone_number" => request()->phone,
-                "name" => $this->name,
+                'tx_ref' => $reference,
+                'currency' => "NGN",
+                'redirect_url' => route('callback'),
+                'customer' => [
+                    'email' => $this->email,
+                    // "phone_number" => request()->phone,
+                    "name" => $this->name,
 
-            ],
-            "meta" => [
-                "user" => auth()->user()->id,
+                ],
+                "meta" => [
+                    "user" => auth()->user()->id,
 
-            ],
-            "customizations" => [
-                "title" => 'BuyBooks',
-                "description" => "Pay for your course",
-            ],
-        ];
+                ],
+                "customizations" => [
+                    "title" => 'BuyBooks',
+                    "description" => "Pay for your course",
+                ],
+            ];
 
-        // dd($data);
+            // dd($data);
 
-        $payment = Flutterwave::initializePayment($data);
+            $payment = Flutterwave::initializePayment($data);
 
-        // dd($payment);
-        if ($payment['status'] !== 'success') {
-            // notify something went wrong
-            session()->flash('Failed', 'Transaction Failed');
-            // return Redirect::to(Session::get('url'));
-            return redirect()->back();
+            // dd($payment);
+            if ($payment['status'] !== 'success') {
+                // notify something went wrong
+                session()->flash('failed', 'Transaction Failed');
+                // return Redirect::to(Session::get('url'));
+                return redirect()->back();
+            }
+            // dd($payment);
+            session()->flash('url', request()->server('HTTP_REFERER'));
+            return redirect($payment['data']['link']);
+        } else {
+            session()->flash('failed', 'Cart is Empty, Add a Product 😞');
         }
-        // dd($payment);
-        session()->flash('url', request()->server('HTTP_REFERER'));
-        return redirect($payment['data']['link']);
 
     }
 

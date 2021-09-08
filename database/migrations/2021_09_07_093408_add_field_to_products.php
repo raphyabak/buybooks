@@ -14,7 +14,8 @@ class AddFieldToProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
+            $table->string('slug')->nullable();
+            $table->text('description')->nullable();
         });
     }
 
@@ -26,7 +27,10 @@ class AddFieldToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
+            // Schema::dropIfExists('slug');
+            // Schema::dropIfExists('desciption');
+            $table->drop('slug');
+            $table->drop('description');
         });
     }
 }

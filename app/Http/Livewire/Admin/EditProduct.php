@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 
 class EditProduct extends Component
@@ -18,6 +19,7 @@ class EditProduct extends Component
     public $categories;
     public $category;
     public $code;
+    public $description;
 
     protected $rules = [
         'title' => 'required',
@@ -33,6 +35,7 @@ class EditProduct extends Component
         $this->title = $this->product->title;
         $this->price = $this->product->price;
         $this->stock = $this->product->stock;
+        $this->description = $this->product->description;
         $this->code = $this->product->code;
         $this->category = $this->product->category->pluck('id');
     }
@@ -71,6 +74,8 @@ class EditProduct extends Component
                 'price' => $this->price,
                 'stock' => $this->stock,
                 'code' => $this->code,
+                'slug' => Str::slug($this->title),
+                'description' => $this->description,
                 'image' => $imageName
             ]);
         }else {
@@ -79,6 +84,8 @@ class EditProduct extends Component
                 'price' => $this->price,
                 'stock' => $this->stock,
                 'code' => $this->code,
+                'slug' => Str::slug($this->title),
+                'description' => $this->description,
             ]);
         }
 

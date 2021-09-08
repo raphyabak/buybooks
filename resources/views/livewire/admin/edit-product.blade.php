@@ -139,6 +139,19 @@
                             </div>
                         </div>
                     </div> --}}
+
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="description" class="block text-sm font-medium text-gray-700">
+                            Product Description</label>
+                        <textarea rows="7" wire:model='description' name="description" id="description"
+                            class="block w-full h-12 px-3 py-2 mt-1 bg-white border border-gray-300 @error('description') border-red-500 @enderror rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                        @error('description')
+                            <span class="flex items-center mt-1 ml-1 text-xs font-bold tracking-wide text-red-500">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="col-span-12 sm:col-span-6">
                         <label for="Product_id" class="block text-sm font-medium text-gray-700">Product
                             Image

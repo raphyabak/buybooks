@@ -24,20 +24,6 @@ class FlutterwaveController extends Controller
         $transactionID = Flutterwave::getTransactionIDFromCallback();
         $data = Flutterwave::verifyTransaction($transactionID);
 
-
-
-        // $paid = Distruption::where('transaction_id',$data['data']['meta']['user'])->firstorFail();
-
-        // $paid->update([
-        //     'paid' => 1,
-        //     'price' => $data['data']['amount']
-        // ]);
-
-        // Alert::success('Success', 'Payment and Registration Successful');
-
-
-        // return redirect('/teens-distruption');
-
         $cartTotal = \Cart::session($this->cartId)->getTotal();
 
         $allCart = \Cart::session($this->cartId)->getContent();
@@ -107,7 +93,7 @@ class FlutterwaveController extends Controller
         }
         elseif ($status ==  'cancelled'){
             //Put desired action/code after transaction has been cancelled here
-            session()->flash('cancelled', 'Payment has been Cancelled');
+            session()->flash('failed', 'Payment has been Cancelled');
 
             // return Redirect::to(Session::get('url'));
             return redirect()->back();

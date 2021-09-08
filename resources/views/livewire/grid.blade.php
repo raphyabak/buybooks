@@ -11,7 +11,7 @@
     </button>
 </div> --}}
 
-<button wire:click="addItem({{ $product->id }})" class="flex w-10 h-10 ml-auto text-white transition duration-300 bg-purple-900 rounded-full hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none">
+<button wire:click="addItem({{ $product->id }})" class="flex w-10 h-10 ml-auto text-white transition duration-300 bg-gray-900 rounded-full hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="m-auto stroke-current">
       <line x1="12" y1="5" x2="12" y2="19"></line>
       <line x1="5" y1="12" x2="19" y2="12"></line>

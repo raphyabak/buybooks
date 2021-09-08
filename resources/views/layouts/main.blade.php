@@ -46,7 +46,7 @@
                         {{-- <span class="mx-1 text-sm">NY</span> --}}
                     </div>
                     <div class="w-full text-2xl font-semibold text-gray-700 md:text-center">
-                       <a href="{{route('home')}}"> BuyBooks</a>
+                        <a href="{{ route('home') }}"> BuyBooks</a>
                     </div>
                     <div class="flex items-center justify-end w-full">
                         <button @click="cartOpen = !cartOpen" class="mx-4 text-gray-600 focus:outline-none sm:mx-0">
@@ -57,7 +57,7 @@
                                 </path>
                             </svg>
                         </button>
-
+                        {{-- @livewire('cart-counter') --}}
                         <div class="flex sm:hidden">
                             <button @click="isOpen = !isOpen" type="button"
                                 class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
@@ -73,8 +73,10 @@
                 </div>
                 <nav :class="isOpen ? '' : 'hidden'" class="mt-4 sm:flex sm:justify-center sm:items-center">
                     <div class="flex flex-col sm:flex-row">
-                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('home')}}">Home</a>
-                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="{{route('checkout')}}">Checkout</a>
+                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
+                            href="{{ route('home') }}">Home</a>
+                        <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
+                            href="{{ route('checkout') }}">Checkout</a>
                         {{-- <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Categories</a>
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Contact</a>
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">About</a> --}}

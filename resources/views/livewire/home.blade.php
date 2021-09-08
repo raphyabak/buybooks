@@ -27,12 +27,15 @@
                         </div>
                         @foreach ($products as $product)
                             <div class="w-full pl-5 pr-5 mb-5 md:w-1/2 lg:w-1/4 lg:pl-2 lg:pr-2">
+
                                 <div
                                     class="p-2 transition duration-300 bg-white rounded-lg m-h-64 hover:translate-y-2 hover:shadow-xl">
-                                    <figure class="mb-2">
+                                    <a href="{{route('details', $product->slug)}}">
+                                         <figure class="mb-2">
                                         <img src="{{ Storage::disk('s3')->url('photos/' . $product->image) }}"
                                             alt="" class="h-64 ml-auto mr-auto" />
                                     </figure>
+                                    </a>
                                     <div class="flex flex-col p-4 bg-gray-700 rounded-lg">
                                         <div>
                                             <h5 class="text-2xl font-bold leading-none text-white">
@@ -48,6 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
 

@@ -23,7 +23,7 @@
     </div>
 
     <div class="flex items-center">
-        <div x-data="{ notificationOpen: false }" class="relative">
+        {{-- <div x-data="{ notificationOpen: false }" class="relative">
             <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -78,7 +78,7 @@
                     </p>
                 </a>
             </div>
-        </div>
+        </div> --}}
 
         <div x-data="{ dropdownOpen: false }" class="relative">
             <button @click="dropdownOpen = ! dropdownOpen"
@@ -102,7 +102,7 @@
                     @csrf
                     <a href="route('logout')" onclick="event.preventDefault();
                          this.closest('form').submit();"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Logout {{auth()->user()->name}}
                     </a>
                 </form>
             </div>
