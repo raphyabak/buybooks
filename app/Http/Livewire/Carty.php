@@ -3,10 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Livewire\Component;
 
-class Cart extends Component
+class Carty extends Component
 {
     public $cartId = 1;
 
@@ -41,6 +40,7 @@ class Cart extends Component
                     'quantity' => 1,
                     'attributes' => [
                         'added_at' => date("Y-m-d H:i:s"),
+                        'image'    => $product->image
                     ],
                 ]);
             }
@@ -102,10 +102,8 @@ class Cart extends Component
 
 
 
-
     public function render()
     {
-
         $cartId = 1;
         $items = \Cart::session($cartId)->getContent()->sortBy(function ($cart) {
             return $cart->attributes->get('added_at');
@@ -122,6 +120,7 @@ class Cart extends Component
                     'pricesingle' => $item->price,
                     'price' => $item->getPriceSum(),
                     'added_at' => $item->attributes->added_at,
+                    'image'    => $item->attributes->image
                 ];
             }
 
@@ -136,8 +135,7 @@ class Cart extends Component
             'total' => $total,
         ];
 
-        return view('livewire.cart',
-        [
+        return view('livewire.carty',[
             'carts' => $cartData,
             'summary' => $summary,
         ]);

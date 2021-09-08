@@ -57,7 +57,9 @@
                                 </path>
                             </svg>
                         </button>
-                        {{-- @livewire('cart-counter') --}}
+                        <span class="inline-flex px-2 text-sm font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                        @livewire('cart-counter')
+                        </span>
                         <div class="flex sm:hidden">
                             <button @click="isOpen = !isOpen" type="button"
                                 class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
@@ -74,7 +76,7 @@
                 <nav :class="isOpen ? '' : 'hidden'" class="mt-4 sm:flex sm:justify-center sm:items-center">
                     <div class="flex flex-col sm:flex-row">
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-                            href="{{ route('home') }}">Home</a>
+                            href="{{ route('home') }}">Home </a>
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
                             href="{{ route('checkout') }}">Checkout</a>
                         {{-- <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Categories</a>
@@ -109,7 +111,7 @@
                 </button>
             </div>
             <hr class="my-3">
-            @livewire('cart')
+            @livewire('carty')
             <a href="{{ route('checkout') }}"
                 class="flex items-center justify-center px-3 py-2 mt-4 text-sm font-medium text-white uppercase bg-blue-600 rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                 <span>Checkout</span>

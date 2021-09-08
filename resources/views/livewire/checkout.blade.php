@@ -18,7 +18,7 @@
                             <h3 class="font-medium text-gray-700">Order total </h3>
                             {{-- <span class="text-sm text-gray-600">Edit</span> --}}
                         </div>
-                        {{-- @livewire('cart') --}}
+                        @livewire('carty')
                     </div>
                 </div>
             </div>

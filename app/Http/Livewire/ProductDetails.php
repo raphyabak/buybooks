@@ -39,6 +39,7 @@ class ProductDetails extends Component
                     'quantity' => 1,
                     'attributes' => [
                         'added_at' => date("Y-m-d H:i:s"),
+                        'image'    => $product->image,
                     ],
                 ]);
             }
