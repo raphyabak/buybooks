@@ -101,7 +101,7 @@
                 <label for="name" class="mb-2 font-bold">Full Name</label>
                 <input wire:model="name" type="text"
                     class="p-2 border border-gray-200 @error('name') border-red-500 @enderror appearance-none focus:outline-none focus:border-gray-500"
-                    type="text">\
+                    type="text">
                 @error('name')
                     <span class="flex items-center mt-1 ml-1 text-xs font-bold tracking-wide text-red-500">
                         {{ $message }}
