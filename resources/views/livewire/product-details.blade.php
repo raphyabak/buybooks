@@ -134,8 +134,10 @@
                 <div class="flex-shrink-0">
                     <div class="relative inline-block">
                         <div class="relative w-16 h-16 overflow-hidden rounded-full">
-                            <img class="absolute top-0 left-0 object-cover w-full h-full bg-cover object-fit"
-                                src="https://picsum.photos/id/646/200/200" alt="Profile picture">
+                            {{-- <img class="absolute top-0 left-0 object-cover w-full h-full bg-cover object-fit"
+                                src="https://picsum.photos/id/646/200/200" alt="Profile picture"> --}}
+                                {{-- <div class="absolute top-0 left-0 object-cover w-full h-full bg-cover object-fit">{{substr($rating->author->name, 0, 1)}} </div> --}}
+                                <div class="relative flex items-center justify-center w-full h-full text-xl text-white uppercase bg-gray-500 rounded-full">{{substr($rating->author->name, 0, 1)}}</div>
                             <div class="absolute top-0 left-0 w-full h-full rounded-full shadow-inner">
                             </div>
                         </div>
