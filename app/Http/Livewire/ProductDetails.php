@@ -3,10 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Codebyray\ReviewRateable\Models\Rating;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductDetails extends Component
 {
+    use WithPagination;
+
+    protected $listeners = ['addedReview'=> 'render'];
+
     public $product;
 
     public function addItem(Product $product)
@@ -50,6 +56,7 @@ class ProductDetails extends Component
 
     public function render()
     {
-        return view('livewire.product-details');
+        $ratings = Rating::where('reviewrateable_id', $this->product->id)->where('approved', 1)->latest()->paginate(5);
+        return view('livewire.product-details', compact('ratings'));
     }
 }

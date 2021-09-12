@@ -72,7 +72,7 @@ class CheckoutForm extends Component
 
         }
 
-        if (!$userlogged && $userexist) {
+        elseif (!$userlogged && $userexist) {
 
             $this->validate([
                 'email' => 'required|string|email|max:255',
@@ -84,51 +84,63 @@ class CheckoutForm extends Component
             ];
 
             $login = Auth::attempt($user);
+
             if (!$login) {
-                session()->flash('failed', 'Password Incorrect 😞');
+                // dd('Here');
+                session()->flash('failed', 'You already have an account, please input your correct password😞');
             }
+        }else {
+
+            $this->validate([
+                'name' => 'required',
+                'email' => 'required|string|email|max:255',
+                'address' => 'required',
+            ]);
         }
 
         if ($total > 0) {
-            $reference = Flutterwave::generateReference();
-            // dd($reference);
-            $data = [
-                'payment_options' => 'card,banktransfer',
-                'amount' => $total,
-                'email' => $this->email,
-                'tx_ref' => $reference,
-                'currency' => "NGN",
-                'redirect_url' => route('callback'),
-                'customer' => [
+            if (Auth::check()) {
+                $reference = Flutterwave::generateReference();
+                // dd($reference);
+                $data = [
+                    'payment_options' => 'card,banktransfer',
+                    'amount' => $total,
                     'email' => $this->email,
-                    // "phone_number" => request()->phone,
-                    "name" => $this->name,
+                    'tx_ref' => $reference,
+                    'currency' => "NGN",
+                    'redirect_url' => route('callback'),
+                    'customer' => [
+                        'email' => $this->email,
+                        // "phone_number" => request()->phone,
+                        "name" => $this->name,
 
-                ],
-                "meta" => [
-                    "user" => auth()->user()->id,
+                    ],
+                    "meta" => [
+                        "user" => auth()->user()->id,
 
-                ],
-                "customizations" => [
-                    "title" => 'BuyBooks',
-                    "description" => "Pay for your course",
-                ],
-            ];
+                    ],
+                    "customizations" => [
+                        "title" => 'BuyBooks',
+                        "description" => "Pay for your course",
+                    ],
+                ];
 
-            // dd($data);
+                // dd($data);
 
-            $payment = Flutterwave::initializePayment($data);
+                $payment = Flutterwave::initializePayment($data);
 
-            // dd($payment);
-            if ($payment['status'] !== 'success') {
-                // notify something went wrong
-                session()->flash('failed', 'Transaction Failed');
-                // return Redirect::to(Session::get('url'));
-                return redirect()->back();
+                // dd($payment);
+                if ($payment['status'] !== 'success') {
+                    // notify something went wrong
+                    session()->flash('failed', 'Transaction Failed');
+                    // return Redirect::to(Session::get('url'));
+                    return redirect()->back();
+                }
+                // dd($payment);
+                session()->flash('url', request()->server('HTTP_REFERER'));
+                return redirect($payment['data']['link']);
             }
-            // dd($payment);
-            session()->flash('url', request()->server('HTTP_REFERER'));
-            return redirect($payment['data']['link']);
+
         } else {
             session()->flash('failed', 'Cart is Empty, Add a Product 😞');
         }
