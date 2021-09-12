@@ -1,4 +1,4 @@
-<svg class="animated h-96" id="freepik_stories-people-search" xmlns="http://www.w3.org/2000/svg"
+<svg class="mx-auto animated h-96 lg:px-12" id="freepik_stories-people-search" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" version="1.1" xmlns:svgjs="http://svgjs.com/svgjs">
     <style>
         svg#freepik_stories-people-search:not(.animated) .animable {

@@ -93,9 +93,9 @@
         </div>
 <div class="justify-center mx-auto my-3 lg:px-12">
         <div class="flex justify-between py-5" x-data="{review:false}">
-            <h2 class="text-2xl font-bold "> Reviews</h2>
+            <h2 class="text-3xl font-bold "> Reviews</h2>
             <button @click="review = true"
-                class="flex items-center px-3 py-2 text-sm font-medium text-white bg-gray-600 rounded-md hover:bg-gray-500 focus:outline-none focus:bg-gray-500">
+                class="flex items-center px-3 py-2 font-medium text-white bg-gray-600 rounded-md lg:text-xl md:text-sm hover:bg-gray-500 focus:outline-none focus:bg-gray-500">
                 <span>Add a Review</span>
                 {{-- <svg class="w-5 h-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
