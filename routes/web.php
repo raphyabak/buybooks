@@ -30,7 +30,10 @@ Route::get('success', Success::class)->name('success');
 Route::get('product/{product:slug}', [ProductController::class, 'details'])->name('details');
 Route::get('/rave/callback', [App\Http\Controllers\FlutterwaveController::class, 'callback'])->name('callback');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Admin'])->group(function () {
+    Route::get('admin', function () {
+        return redirect('admin/products');
+    });
     Route::get('admin/roles', Roles::class)->name('roles');
     Route::get('admin/permissions', Permissions::class)->name('permissions');
     Route::get('admin/users', Users::class)->name('users');

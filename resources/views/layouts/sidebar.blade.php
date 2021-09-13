@@ -11,7 +11,7 @@
     </div>
 
     <nav class="mt-10">
-        <a class="flex items-center px-6 py-2 mt-4
+        {{-- <a class="flex items-center px-6 py-2 mt-4
         @if (request()->routeIs('dashboard'))
         text-gray-100 bg-gray-700 bg-opacity-35
         @else
@@ -28,7 +28,7 @@
             </svg>
 
             <span class="mx-3">Dashboard</span>
-        </a>
+        </a> --}}
 
         <a class="flex items-center px-6 py-2 mt-4  @if (request()->is('admin/categories'))
             text-gray-100 bg-gray-700 bg-opacity-35
@@ -110,7 +110,7 @@
             <span class="mx-3">Users</span>
         </a>
 
-        <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        {{-- <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
             href="/forms">
             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -120,6 +120,6 @@
             </svg>
 
             <span class="mx-3">Forms</span>
-        </a>
+        </a> --}}
     </nav>
 </div>
